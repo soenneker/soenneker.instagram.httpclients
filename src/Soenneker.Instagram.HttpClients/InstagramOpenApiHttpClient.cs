@@ -27,7 +27,7 @@ public sealed class InstagramOpenApiHttpClient : IInstagramOpenApiHttpClient
     {
         return _httpClientCache.Get(nameof(InstagramOpenApiHttpClient), (config: _config, baseUrl: _config["Instagram:ClientBaseUrl"] ?? _prodBaseUrl), static state =>
         {
-            var apiKey = state.config.GetValueStrict<string>("Instagram:AccessToken");
+            var apiKey = state.config.GetStringStrict("Instagram:AccessToken");
             string authHeaderName = state.config["Instagram:AuthHeaderName"] ?? "Authorization";
             string authHeaderValueTemplate = state.config["Instagram:AuthHeaderValueTemplate"] ?? "Bearer {token}";
             string authHeaderValue = authHeaderValueTemplate.Replace("{token}", apiKey, StringComparison.Ordinal);
